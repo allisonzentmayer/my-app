@@ -1,8 +1,6 @@
 import React from 'react';
-import { Icon, Label, Menu, Table } from 'semantic-ui-react'
+import {  Table } from 'semantic-ui-react'
 export default class WellIndexBreakdown extends React.Component {
-
-
     constructor(props) {
       super(props);
       this.state = {
@@ -24,12 +22,12 @@ export default class WellIndexBreakdown extends React.Component {
                             <Table.HeaderCell>Ct</Table.HeaderCell>
                         </Table.Row>
                     </Table.Header>
-            
+
                     <Table.Body>
                         {selectedWells}
                     </Table.Body>
                 </Table>
-            </div>   
+            </div>
         );
     }
 }
