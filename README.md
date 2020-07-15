@@ -5,11 +5,12 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 This app displays data from a 384-well PCR plate
 
 Next Steps:
-- cache json data formatting in CycleOverviewContainer
+- maintain selected state on refresh
+- unit and acceptance tests
+- improve grid functionality
+- cache json data retrieving and formatting in CycleOverviewContainer
 - improve select all and select row/column functions to be more readable
 - refactor CycleBreakdown to have a Well component
-- improve grid functionality
-- unit and acceptance tests
 
 In the project directory, you can run:
 
