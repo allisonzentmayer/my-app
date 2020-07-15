@@ -1,79 +1,60 @@
 import React from 'react';
 import _ from 'lodash'
 import { Table } from 'semantic-ui-react';
-import qcprData from '../data/qpcr-data.json';
-
-const rows = _.times(24, (i) => (
-    <Table.HeaderCell key={i}>{i + 1}</Table.HeaderCell>
-));
 
 export default class CycleBreakdown extends React.Component {
-
-    rowLetters = ['A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P'];
-
-    constructor(props) {
-      super(props);
-      this.state = {
-      }
+  constructor(props) {
+    super(props);
+    this.state = {
     }
+  }
 
-    getQpcrData() {
-        const rowLetters = ['A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P'];
-        const maxColumnLength = 24;
-        const data = qcprData;
-        const wellKeys = Object.keys(data);
-        let formattedData = [];
-        let row = [];
+  rowLetters = ['A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P'];
 
-        wellKeys.forEach((wellKey) => {
-          let location = wellKey.split(/[:|]/);
-          let well = {
-            row: location[1],
-            rowLetter: rowLetters[location[1] - 1],
-            column: location[4],
-            runs: data[wellKey],
-            ct: 1,
-            originalKey: wellKey,
-          };
+  columns = _.times(24, (i) => (
+    <Table.HeaderCell key={i}>{i + 1}</Table.HeaderCell>
+  ));
 
-          row.push(well);
+  getWells(row) {
+    return row.map((well => {
+    let position = well.position;
+    let gradientValue = well.ct / 40;
+    let gradientCss = `rgba(143,18,18,${gradientValue})`
+    let wellSelected = this.props.selectedWells.hasOwnProperty(position) ? 'selected' : '';
+    return (
+      <Table.Cell className='well' key={well.position} value={well} onClick={() => this.props.toggleSelectedWell(well)}>
+        <span style={{backgroundColor: gradientCss}} className={'dot ' + wellSelected}></span>
+      </Table.Cell>
+      );
+    }));
+  }
 
-          if (well.column === maxColumnLength) {
-            formattedData.push(row);
-            row = [];
-          }
-        });
-        console.log(formattedData);
-        return formattedData;
-      }
+  getRows() {
+    const qpcrData = this.props.qpcrData;
+    return qpcrData.map((row) => {
+      let rowLetter = row[0].rowLetter;
+      return (<Table.Row key={rowLetter}>
+          <Table.Cell>{row[0].rowLetter}</Table.Cell>
+          {this.getWells(row)}
+        </Table.Row>);
+    })
+  }
 
-
-    render() {
-        const data = this.getQpcrData();
-        console.log(data);
-        return (
-            <div>
-                <Table definition>
-                    <Table.Header>
-                        <Table.Row>
-                            <Table.HeaderCell>
-                                <input type="checkbox"></input>
-                            </Table.HeaderCell>
-                            {rows}
-                        </Table.Row>
-                    </Table.Header>
-                    <Table.Body>
-                        {this.rowLetters.map((letter) => {
-                            return (<Table.Row>
-                                <Table.Cell>{letter}</Table.Cell>
-                                <Table.Cell >test</Table.Cell>
-                                <Table.Cell>test</Table.Cell>
-                                <Table.Cell>test</Table.Cell>
-                            </Table.Row>)
-                        })}
-                    </Table.Body>
-                </Table>
-            </div>
-        );
-    }
+  render() {
+    return (
+      <div>
+        <Table definition>
+          <Table.Header>
+            <Table.Row>
+              <Table.HeaderCell/>
+              {this.columns}
+            </Table.Row>
+          </Table.Header>
+          <Table.Body>
+            {this.getRows()}
+          </Table.Body>
+        </Table>
+      </div>
+    );
+  }
 }

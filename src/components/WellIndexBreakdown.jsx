@@ -8,10 +8,13 @@ export default class WellIndexBreakdown extends React.Component {
     }
 
     render() {
-        const selectedWells = this.props.selectedWells.map((well) => {
-                            return (<Table.Row>
-                                <Table.Cell>{well.position}</Table.Cell>
-                                <Table.Cell>{well.ct}</Table.Cell>
+        const selectedWells = this.props.selectedWells;
+        const selectedWellPositions = Object.keys(selectedWells);
+        const selectedWellRows = selectedWellPositions.map((position) => {
+                            const ct = selectedWells[position];
+                            return (<Table.Row key={position}>
+                                <Table.Cell>{position}</Table.Cell>
+                                <Table.Cell>{ct}</Table.Cell>
                             </Table.Row>)});
         return (
             <div>
@@ -24,7 +27,7 @@ export default class WellIndexBreakdown extends React.Component {
                     </Table.Header>
 
                     <Table.Body>
-                        {selectedWells}
+                        {selectedWellRows}
                     </Table.Body>
                 </Table>
             </div>
