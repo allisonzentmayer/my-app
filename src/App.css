@@ -27,3 +27,7 @@
 .ui.table.definition thead {
   text-align: center;
 }
+
+.clickable{
+  cursor: pointer !important;
+}

@@ -12,7 +12,7 @@ export default class CycleBreakdown extends React.Component {
   rowLetters = ['A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P'];
 
   columns = _.times(24, (i) => (
-    <Table.HeaderCell key={i}>{i + 1}</Table.HeaderCell>
+    <Table.HeaderCell key={i} className="clickable" onClick={() => this.props.toggleSelect(i + 1)}>{i + 1}</Table.HeaderCell>
   ));
 
   getWells(row) {
@@ -33,8 +33,8 @@ export default class CycleBreakdown extends React.Component {
     const qpcrData = this.props.qpcrData;
     return qpcrData.map((row) => {
       let rowLetter = row[0].rowLetter;
-      return (<Table.Row key={rowLetter}>
-          <Table.Cell>{row[0].rowLetter}</Table.Cell>
+      return (<Table.Row key={rowLetter} className="clickable">
+          <Table.Cell onClick={() => this.props.toggleSelect(rowLetter)}>{row[0].rowLetter}</Table.Cell>
           {this.getWells(row)}
         </Table.Row>);
     })
