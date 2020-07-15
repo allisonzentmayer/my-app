@@ -1,5 +1,18 @@
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
+## qPcr Data Overview App
+
+This app displays data from a 384-well PCR plate
+
+Next Steps:
+- cache json data formatting in CycleOverviewContainer
+- improve select all and select row/column functions to be more readable
+- refactor CycleBreakdown to have a Well component
+- improve grid functionality
+- unit and acceptance tests
+
+In the project directory, you can run:
+
 ## Available Scripts
 
 In the project directory, you can run:

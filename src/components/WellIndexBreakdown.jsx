@@ -1,12 +1,6 @@
 import React from 'react';
 import {  Table } from 'semantic-ui-react'
 export default class WellIndexBreakdown extends React.Component {
-    constructor(props) {
-      super(props);
-      this.state = {
-      }
-    }
-
     render() {
         const selectedWells = this.props.selectedWells;
         const selectedWellPositions = Object.keys(selectedWells);
