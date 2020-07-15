@@ -46,7 +46,6 @@ export default class CycleOverviewContainer extends React.Component {
         row = [];
       }
     });
-    console.log(formattedData);
     return formattedData;
   }
 

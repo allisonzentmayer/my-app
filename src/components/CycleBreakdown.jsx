@@ -9,8 +9,6 @@ export default class CycleBreakdown extends React.Component {
     }
   }
 
-  rowLetters = ['A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P'];
-
   columns = _.times(24, (i) => (
     <Table.HeaderCell key={i} className="clickable" onClick={() => this.props.toggleSelect(i + 1)}>{i + 1}</Table.HeaderCell>
   ));
